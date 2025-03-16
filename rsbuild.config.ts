@@ -26,11 +26,10 @@ export default defineConfig({
     },
   },
   tools: {
-    async rspack(config) {
+    async rspack(config, { isDev }) {
       // https://github.com/posva/unplugin-vue-router/issues/496
       const { scanPages, generateRoutes } = createRoutesContext(resolveOptions({ }))
-
-      await scanPages()
+      await scanPages(isDev)
 
       // for windows  https://github.com/web-infra-dev/rspack/issues/7787
       config.plugins?.push(new RspackVirtualModulePlugin({
